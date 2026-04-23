@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">ghibliapi</string>
+    <string name="title_activity_main">ghibliapi</string>
+    <string name="package_name">com.ghibliapi.app</string>
+    <string name="custom_url_scheme">com.ghibliapi.app</string>
+</resources>
