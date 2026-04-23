@@ -1,0 +1,18 @@
+.filtros{
+  display:flex;
+  gap:10px;
+  margin:15px 0;
+}
+
+.filtros button{
+  padding:8px 14px;
+  border-radius:20px;
+  border:none;
+  background:#eee;
+  cursor:pointer;
+}
+
+.filtros button.activo{
+  background:#222;
+  color:white;
+}
