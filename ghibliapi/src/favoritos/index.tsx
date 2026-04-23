@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import "./style.css";
 
 interface Film {
   id: string
@@ -37,7 +38,7 @@ function Favoritos() {
 
   return (
     <div>
-      <h1>Películas favoritas</h1>
+      <h1 className="titulo-favoritos">Películas favoritas</h1>
 
       {peliculasFavoritas.length === 0 ? (
         <p>No tienes películas favoritas</p>

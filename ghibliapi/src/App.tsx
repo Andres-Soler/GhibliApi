@@ -21,30 +21,21 @@ function App() {
   }, []);
 
   return (
-    <>
-      <Router>
+    <Router>
 
-        <nav className="c-menu">
+      <div id="center">
 
-          <Link to="/">
-            <p>Home</p>
-          </Link>
+        <nav className="navbar">
 
-          <Link to="/favoritos">
-            <p>Favoritos</p>
-          </Link>
+          <Link to="/">Home</Link>
 
-          <Link to="/original">
-            <p>Original</p>
-          </Link>
+          <Link to="/favoritos">Favoritos</Link>
 
-          <Link to="/informativa">
-            <p>Informativa</p>
-          </Link>
+          <Link to="/original">Original</Link>
 
-          <Link to="/usuario">
-            <p>Usuario</p>
-          </Link>
+          <Link to="/informativa">Informativa</Link>
+
+          <Link to="/usuario">Usuario</Link>
 
         </nav>
 
@@ -64,8 +55,9 @@ function App() {
 
         </Routes>
 
-      </Router>
-    </>
+      </div>
+
+    </Router>
   )
 }
 

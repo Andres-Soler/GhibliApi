@@ -65,15 +65,20 @@ function Home() {
   })
 
   return (
-    <>
 
-      <input
-        type="text"
-        placeholder="Buscar película..."
-        value={busqueda}
-        onChange={(e) => setBusqueda(e.target.value)}
-      />
+    <div className="home">
 
+      {/* BUSCADOR */}
+      <div className="search-bar">
+        <input
+          type="text"
+          placeholder="Buscar película..."
+          value={busqueda}
+          onChange={(e) => setBusqueda(e.target.value)}
+        />
+      </div>
+
+      {/* FILTROS */}
       <div className="filtros">
 
         <button
@@ -99,10 +104,12 @@ function Home() {
 
       </div>
 
+      {/* TABLA */}
       <div className="tabla-container">
+
         <h2>Películas</h2>
 
-        <table className="tabla-posiciones">
+        <table className="tabla">
 
           <thead>
             <tr>
@@ -116,36 +123,51 @@ function Home() {
 
           <tbody>
 
-            {filmsFiltrados.map((film) => (
-              <tr key={film.id}>
+            {filmsFiltrados.length > 0 ? (
+              filmsFiltrados.map((film) => (
+                <tr key={film.id}>
 
-                <td>
-                  <img src={film.image} width="60" />
+                  <td>
+                    <img src={film.image} width="60" />
+                  </td>
+
+                  <td>
+                    <Link to={`/pelicula/${film.id}`}>
+                      {film.title}
+                    </Link>
+                  </td>
+
+                  <td>{film.director}</td>
+
+                  <td>{film.release_date}</td>
+
+                  <td className="fav-col">
+                    <button 
+                      className="fav-btn"
+                      onClick={() => toggleFavorite(film.id)}
+                    >
+                      {favorites.includes(film.id) ? "❤️" : "🤍"}
+                    </button>
+                  </td>
+
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan={5} className="sin-resultados">
+                  No se encontraron películas
                 </td>
-
-                <td>
-                  <Link to={`/pelicula/${film.id}`}>
-                    {film.title}
-                  </Link>
-                </td>
-
-                <td>{film.director}</td>
-                <td>{film.release_date}</td>
-
-                <td>
-                  <button onClick={() => toggleFavorite(film.id)}>
-                    {favorites.includes(film.id) ? "❤️" : "🤍"}
-                  </button>
-                </td>
-
               </tr>
-            ))}
+            )}
 
           </tbody>
 
         </table>
+
       </div>
-    </>
+
+    </div>
+
   )
 }
 
