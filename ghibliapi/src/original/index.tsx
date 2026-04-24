@@ -82,10 +82,6 @@ function Original() {
 
             <p><strong>Ambiente:</strong> {sentimiento}</p>
 
-            <p className="descripcion">
-              {randomFilm.description}
-            </p>
-
           </div>
         )}
 

@@ -1,71 +1,65 @@
-import { useState, useEffect } from "react"
-import { Link } from "react-router-dom"
-import "./style.css"
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import "./style.css";
 
 interface Film {
-  id: string
-  title: string
-  description: string
-  director: string
-  release_date: string
-  image: string
+  id: string;
+  title: string;
+  description: string;
+  director: string;
+  release_date: string;
+  image: string;
 }
 
 function Home() {
-
-  const [films, setFilms] = useState<Film[]>([])
-  const [busqueda, setBusqueda] = useState("")
-  const [filtro, setFiltro] = useState("todos")
-  const [favorites, setFavorites] = useState<string[]>([])
+  const [films, setFilms] = useState<Film[]>([]);
+  const [busqueda, setBusqueda] = useState("");
+  const [filtro, setFiltro] = useState("todos");
+  const [favorites, setFavorites] = useState<string[]>([]);
 
   useEffect(() => {
-
-    const stored = JSON.parse(localStorage.getItem("favorites") || "[]")
-    setFavorites(stored)
+    const stored = JSON.parse(localStorage.getItem("favorites") || "[]");
+    setFavorites(stored);
 
     const fetchFilms = async () => {
       try {
-        const res = await fetch("https://ghibliapi.vercel.app/films/")
-        const data = await res.json()
-        setFilms(data)
+        const res = await fetch("https://ghibliapi.vercel.app/films/");
+        const data = await res.json();
+        setFilms(data);
       } catch (error) {
-        console.error("Error cargando películas:", error)
+        console.error("Error cargando películas:", error);
       }
-    }
+    };
 
-    fetchFilms()
-
-  }, [])
+    fetchFilms();
+  }, []);
 
   const toggleFavorite = (id: string) => {
-
-    let updated = [...favorites]
+    let updated = [...favorites];
 
     if (updated.includes(id)) {
-      updated = updated.filter((fav) => fav !== id)
+      updated = updated.filter((fav) => fav !== id);
     } else {
-      updated.push(id)
+      updated.push(id);
     }
 
-    setFavorites(updated)
-    localStorage.setItem("favorites", JSON.stringify(updated))
-  }
+    setFavorites(updated);
+    localStorage.setItem("favorites", JSON.stringify(updated));
+  };
 
   const filmsFiltrados = films.filter((film) => {
-
     const coincideBusqueda =
       busqueda.length < 2 ||
-      film.title.toLowerCase().includes(busqueda.toLowerCase())
+      film.title.toLowerCase().includes(busqueda.toLowerCase());
 
     const coincideDirector =
       filtro === "todos" ||
-      film.director.toLowerCase().includes(filtro)
+      film.director.toLowerCase().includes(filtro);
 
-    return coincideBusqueda && coincideDirector
-  })
+    return coincideBusqueda && coincideDirector;
+  });
 
   return (
-
     <div className="home">
 
       {/* BUSCADOR */}
@@ -82,22 +76,22 @@ function Home() {
       <div className="filtros">
 
         <button
+          className={`btn ${filtro === "todos" ? "active" : ""}`}
           onClick={() => setFiltro("todos")}
-          className={filtro === "todos" ? "activo" : ""}
         >
           Todas
         </button>
 
         <button
+          className={`btn ${filtro === "miyazaki" ? "active" : ""}`}
           onClick={() => setFiltro("miyazaki")}
-          className={filtro === "miyazaki" ? "activo" : ""}
         >
           Miyazaki
         </button>
 
         <button
+          className={`btn ${filtro === "takahata" ? "active" : ""}`}
           onClick={() => setFiltro("takahata")}
-          className={filtro === "takahata" ? "activo" : ""}
         >
           Takahata
         </button>
@@ -110,7 +104,6 @@ function Home() {
         <h2>Películas</h2>
 
         <table className="tabla">
-
           <thead>
             <tr>
               <th>Poster</th>
@@ -122,11 +115,9 @@ function Home() {
           </thead>
 
           <tbody>
-
             {filmsFiltrados.length > 0 ? (
               filmsFiltrados.map((film) => (
                 <tr key={film.id}>
-
                   <td>
                     <img src={film.image} width="60" />
                   </td>
@@ -141,15 +132,14 @@ function Home() {
 
                   <td>{film.release_date}</td>
 
-                  <td className="fav-col">
-                    <button 
+                  <td>
+                    <button
                       className="fav-btn"
                       onClick={() => toggleFavorite(film.id)}
                     >
                       {favorites.includes(film.id) ? "❤️" : "🤍"}
                     </button>
                   </td>
-
                 </tr>
               ))
             ) : (
@@ -159,7 +149,6 @@ function Home() {
                 </td>
               </tr>
             )}
-
           </tbody>
 
         </table>
@@ -167,8 +156,7 @@ function Home() {
       </div>
 
     </div>
-
-  )
+  );
 }
 
-export default Home
+export default Home;
