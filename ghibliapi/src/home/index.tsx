@@ -62,7 +62,6 @@ function Home() {
   return (
     <div className="home">
 
-      {/* BUSCADOR */}
       <div className="search-bar">
         <input
           type="text"
@@ -72,7 +71,6 @@ function Home() {
         />
       </div>
 
-      {/* FILTROS */}
       <div className="filtros">
 
         <button
