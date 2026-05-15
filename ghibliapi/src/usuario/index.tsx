@@ -8,7 +8,7 @@ function Usuario() {
 
       <img
         src={gato}
-        alt="Gato bailando"
+        alt="Gato bailando!"
         width="200"
       />
 
