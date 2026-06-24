@@ -143,7 +143,7 @@ function Home() {
             ) : (
               <tr>
                 <td colSpan={5} className="sin-resultados">
-                  No se encontraron películas •n•
+                  No se encontraron películas
                 </td>
               </tr>
             )}
